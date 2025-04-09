@@ -1,0 +1,2 @@
+C:/Users/Lenovo/StudioProjects/E-COMMERCE/android/app/.cxx/Debug/2r6f4m44/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Lenovo/StudioProjects/E-COMMERCE/android/app/.cxx/Debug/2r6f4m44/armeabi-v7a/CMakeFiles/rebuild_cache.dir
