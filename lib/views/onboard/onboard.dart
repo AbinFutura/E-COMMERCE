@@ -1,4 +1,5 @@
 import 'package:e_commerce_project/utils/constants/images.dart';
+import 'package:e_commerce_project/views/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class Onboard extends StatefulWidget {
@@ -67,7 +68,9 @@ class _OnboardState extends State<Onboard> {
                         height: 30,
                       ),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+                          },
                           child: Text(
                             "NEXT",
                             style: TextStyle(color: Colors.black),
