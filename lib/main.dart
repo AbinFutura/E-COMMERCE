@@ -1,3 +1,4 @@
+import 'package:e_commerce_project/views/home/home_page.dart';
 import 'package:e_commerce_project/views/onboard/onboard.dart';
 import 'package:e_commerce_project/views/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,13 +21,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Onboard(),
+      home: HomePage(),
     );
   }
 }
