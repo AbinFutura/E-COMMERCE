@@ -172,7 +172,7 @@ packages:
     dependency: transitive
     description:
       name: http_parser
-      sha256: "2aa08ce0341cc9b354a498388e30986515406668dbcc4f7c950c3e715496693b"
+      sha256: "178d74305e7866013777bab2c3d8726205dc5a4dd935297175b19a23a2e66571"
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
@@ -269,7 +269,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
->>>>>>> 3ffe74f (on boarding added)
   source_span:
     dependency: transitive
     description:
