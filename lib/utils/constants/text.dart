@@ -11,4 +11,6 @@ class ETexts {
   static final String onboardtitle4 = "Get Support From Our \n Skilled Team";
   static final String onboardtitle5 =
       "If our products don't meet your\n expectations, we're available 24/7 to \n assist you.";
+
+      
 }
