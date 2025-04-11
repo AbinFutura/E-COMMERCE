@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const Onboard(),
+            builder: (context) =>  OnboardingScreen(),
           ));
     });
     super.initState();
@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           height: MediaQuery.of(context).size.height,
           child: Image(
             image: AssetImage(
-              EImages.splash,
+              EImages.splash1,
             ),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,

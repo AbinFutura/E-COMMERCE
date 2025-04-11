@@ -1,88 +1,97 @@
 import 'package:e_commerce_project/utils/constants/images.dart';
-import 'package:e_commerce_project/views/home/home_page.dart';
+import 'package:e_commerce_project/utils/constants/text.dart';
+import 'package:e_commerce_project/views/auth/Signup_page.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class Onboard extends StatefulWidget {
-  const Onboard({super.key});
+import '../widgets/custom_onboard.dart';
+
+class OnboardingScreen extends StatefulWidget {
+  OnboardingScreen({super.key});
 
   @override
-  State<Onboard> createState() => _OnboardState();
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardState extends State<Onboard> {
+class _OnboardingScreenState extends State<OnboardingScreen> {
   final pageController = PageController();
-  int currentPage = 0;
+  int currentPage = 0; // Track the current page
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
+      child: Scaffold(
+        body: Stack(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
-              child: PageView(
-                children: [
-                  Column(
-                    children: [
-                      Image.asset(EImages.onboard1, height: 300, width: 300),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Online Home Store\n     and Grocery ",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 40),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Column(
-                        children: [
-                          Text(
-                            "Discover all style and budgets of",
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "furniture,appliances,kitchen,and more",
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "from 500+ brand in your hand",
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-                          },
-                          child: Text(
-                            "NEXT",
-                            style: TextStyle(color: Colors.black),
-                          ))
-                    ],
-                  ),
-                ],
+            PageView(
+              controller: pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  currentPage = index;
+                });
+              },
+              children: [
+                OnboardWidget(
+                    image: EImages.onboard1,
+                    title: ETexts.onboardtitle,
+                    subtitle: ETexts.onboardtitle1),
+                OnboardWidget(
+                    image: EImages.onboard2,
+                    title: ETexts.onboardtitle2,
+                    subtitle: ETexts.onboardtitle3),
+                OnboardWidget(
+                    image: EImages.onboard3,
+                    title: ETexts.onboardtitle4,
+                    subtitle: ETexts.onboardtitle5),
+              ],
+            ),
+            Positioned(
+              bottom: 20,
+              left: MediaQuery.of(context).size.width * 0.35, // Adjust position
+              child: SmoothPageIndicator(
+                controller: pageController,
+                count: 3,
+                effect: JumpingDotEffect(
+                    activeDotColor: Colors.white, dotHeight: 10, dotWidth: 10),
               ),
-            )
+            ),
+            Positioned(
+              bottom: 20,
+              right: 20, // Position on the right
+              child: IconButton(
+                onPressed: () {
+                  if (currentPage < 2) {
+                    // Check if not on the last page
+                    pageController.animateToPage(
+                      currentPage + 1,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  } else {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => SignupPage()));
+                    // Navigate to the next screen or perform an action
+                    // print("Last Page Reached!");
+                    // Example: Navigator.push(...);
+                  }
+                },
+                icon: currentPage == 2
+                    ? Text(
+                        "Next",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      )
+                    : Icon(
+                        Icons.double_arrow_sharp,
+                        color: Colors.white,
+                      ),
+                // or use a custom image:
+                // icon: Image.asset('assets/next_icon.png', color: Colors.white,),
+              ),
+            ),
           ],
         ),
       ),
-    ));
+    );
   }
 }
