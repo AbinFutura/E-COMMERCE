@@ -70,6 +70,10 @@ flutter:
     - assets/images/splash/
     - assets/images/onboarding/
     - assets/images/logo/
+    - assets/images/userprofile/
+    - assets/images/cart/
+    - assets/images/homepage/
+
 
 
 

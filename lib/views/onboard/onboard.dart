@@ -46,8 +46,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ],
             ),
             Positioned(
-              bottom: 20,
-              left: MediaQuery.of(context).size.width * 0.35, // Adjust position
+              bottom: 140,
+
+              left: MediaQuery.of(context).size.width * 0.45, // Adjust position
               child: SmoothPageIndicator(
                 controller: pageController,
                 count: 3,
@@ -58,36 +59,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Positioned(
               bottom: 20,
               right: 20, // Position on the right
-              child: IconButton(
-                onPressed: () {
-                  if (currentPage < 2) {
-                    // Check if not on the last page
-                    pageController.animateToPage(
-                      currentPage + 1,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.ease,
-                    );
-                  } else {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => SignupPage()));
-                    // Navigate to the next screen or perform an action
-                    // print("Last Page Reached!");
-                    // Example: Navigator.push(...);
-                  }
-                },
-                icon: currentPage == 2
-                    ? Text(
-                        "Next",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      )
-                    : Icon(
-                        Icons.double_arrow_sharp,
-                        color: Colors.white,
-                      ),
-                // or use a custom image:
-                // icon: Image.asset('assets/next_icon.png', color: Colors.white,),
-              ),
+              child:SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width * 0.9,
+
+                  child: ElevatedButton(onPressed: (){
+
+                    if (currentPage < 2) {
+                      // Check if not on the last page
+                      pageController.animateToPage(
+                        currentPage + 1,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    } else {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => SignupPage()));
+                      // Navigate to the next screen or perform an action
+                      // print("Last Page Reached!");
+                      // Example: Navigator.push(...);
+                    }
+
+                  },
+                      style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,),)),
+
+                      child:const  Text('NEXT')))
+
+
             ),
           ],
         ),
