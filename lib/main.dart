@@ -1,3 +1,6 @@
+import 'package:e_commerce_project/views/cart/cart_page.dart';
+import 'package:e_commerce_project/views/home/home_page.dart';
+import 'package:e_commerce_project/views/onboard/onboard.dart';
 import 'package:e_commerce_project/views/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +27,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: HomePage(),
+      // home: SplashScreen(),
     );
   }
 }

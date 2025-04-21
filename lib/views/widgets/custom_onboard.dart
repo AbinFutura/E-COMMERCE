@@ -31,16 +31,16 @@ class OnboardWidget extends StatelessWidget {
               Text(
                 title!,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 40,
                     fontWeight: FontWeight.bold),
               ),
             Text(
               subtitle,
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold),
+                  color: Colors.grey,
+                  fontSize: 20,
+                  ),
             )
           ],
         ),
