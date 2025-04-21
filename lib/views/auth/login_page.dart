@@ -65,11 +65,13 @@ class LoginPage extends StatelessWidget {
       SizedBox(height: 20,),
       SizedBox(width: double.infinity,
         child: OutlinedButton.icon(onPressed: () {},
+            icon: Image(image: AssetImage("assets/images/logo/google.png"),height: 15, width: 15,),
             label: Text("Log in with Google", style: TextStyle(color: Colors.green[900]),)),),
 
       SizedBox(height: 20,),
       SizedBox(width: double.infinity,
         child: OutlinedButton.icon(onPressed: () {},
+            icon: Image(image: AssetImage("assets/images/logo/facebook.png"), height: 15, width: 15,),
             label: Text("Log in with Facebook", style: TextStyle(color: Colors.green[900]),)),),
 
       SizedBox(height: 20,),

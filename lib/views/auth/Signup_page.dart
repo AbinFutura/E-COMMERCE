@@ -81,7 +81,8 @@ class SignupPage extends StatelessWidget {
               SizedBox(height: 20,),
               RichText(textAlign: TextAlign.start, text: TextSpan(
                 style: TextStyle(fontSize: 18, color: Colors.grey),
-                children: [TextSpan(
+                children: [
+                  TextSpan(
                   text: "By clicking Create Account, you acknowledge you have read and agreed to our "),
 
                 TextSpan(
@@ -136,11 +137,17 @@ class SignupPage extends StatelessWidget {
           SizedBox(height: 10,),
           SizedBox(width: double.infinity,
             child: OutlinedButton.icon(onPressed: () {},
+                icon: SizedBox(
+                    height: 15, width: 15,
+                    child: Image(image: AssetImage("assets/images/logo/google.png"))),
                 label: Text("Continue with Google", style: TextStyle(color: Colors.green[900]),)),),
 
           SizedBox(height: 10,),
           SizedBox(width: double.infinity,
             child: OutlinedButton.icon(onPressed: () {},
+                icon: SizedBox(
+                    height: 15, width: 15,
+                    child: Image(image: AssetImage("assets/images/logo/facebook.png"))),
                 label: Text("Continue with Facebook", style: TextStyle(color: Colors.green[900]),)),),
         ],
       ),),
