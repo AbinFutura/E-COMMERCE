@@ -1,3 +1,4 @@
+import 'package:e_commerce_project/views/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -46,7 +47,9 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8)
             ),
                 backgroundColor: Colors.green[900]),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
+            },
             child:Text("Log In ", style: TextStyle(color: Colors.white, fontSize: 20),)),
       ),
 
