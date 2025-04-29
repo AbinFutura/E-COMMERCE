@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:e_commerce_project/views/bottomnavbar/bottomnav.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatelessWidget {
@@ -117,7 +118,9 @@ class SignupPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8)
                 ),
                     backgroundColor: Colors.green[900]),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Bottomnav()));
+                },
                 child:Text("Create Account", style: TextStyle(color: Colors.white, fontSize: 20),)),
           ),
 
