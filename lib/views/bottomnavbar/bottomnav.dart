@@ -1,5 +1,4 @@
 import 'package:e_commerce_project/utils/constants/colors.dart';
-import 'package:e_commerce_project/views/auth/Signup_page.dart';
 import 'package:e_commerce_project/views/cart/cart_page.dart';
 import 'package:e_commerce_project/views/home/home_page.dart';
 import 'package:e_commerce_project/views/profile/profile_page.dart';

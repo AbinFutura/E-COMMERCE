@@ -1,6 +1,7 @@
 import 'package:e_commerce_project/views/auth/Signup_page.dart';
 import 'package:e_commerce_project/views/auth/login_page.dart';
 import 'package:e_commerce_project/views/onboard/onboard.dart';
+import 'package:e_commerce_project/views/product/product_details_page.dart';
 import 'package:e_commerce_project/views/splash/splash_screen.dart';
 import 'package:e_commerce_project/views/wishlist/wishlist.dart';
 import 'package:e_commerce_project/views/cart/cart_page.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SignupPage(),
+      home: SplashScreen(),
     );
   }
 }
