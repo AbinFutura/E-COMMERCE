@@ -17,6 +17,10 @@ class EImages {
   static String cart3 = "assets/images/cart/cart 3.png";
   static String cart4 = "assets/images/cart/cart 4.png";
 
+  //product details images
+  static String details1 = "assets/images/detailspage/details1.png";
+
+
 
 
 

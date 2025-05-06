@@ -1,5 +1,4 @@
 import 'package:e_commerce_project/utils/constants/images.dart';
-import 'package:e_commerce_project/views/home/home_page.dart';
 import 'package:e_commerce_project/views/onboard/onboard.dart';
 import 'package:flutter/material.dart';
 

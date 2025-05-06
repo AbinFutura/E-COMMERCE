@@ -1,10 +1,14 @@
+import 'package:e_commerce_project/providers/product_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final productAsync= ref.watch(productListProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -97,20 +101,21 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
 
             SizedBox(
-              height: 220,
-              child: ListView(
+              height: 250,
+              child: productAsync.when(data: (products) => ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  specialOfferCard("EKERÖ", "\$230.00", "\$512.58", "4.9", 256,
-                      "assets/images/homepage/image 4.png"),
-                  specialOfferCard("STRANDMON", "\$274.13", "\$856.60", "4.8",
-                      256, "assets/images/homepage/image 9.png"),
-                  specialOfferCard("PLATTLANS", "\$24.99", "\$69.99", "4.9",
-                      256, "assets/images/homepage/image 17.png"),
-                  specialOfferCard("MALM", "\$50.99", "\$69.99", "4.9", 128,
-                      "assets/images/homepage/image 18.png"),
-                ],
-              ),
+                itemCount: products.products!.length,
+                
+                
+                itemBuilder: (context,index){
+
+                final product = products.products![index];
+                return specialOfferCard(product.title!, product.price!, product.price!, product.rating!, product.rating!, product.thumbnail!,product.discountPercentage!);
+                
+
+                }), error: (err, stack) => Center(child: Text('Error: $err')), loading: () => Center(child: CircularProgressIndicator()),)
+              
+              
             ),
 
             const SizedBox(height: 24),
@@ -136,12 +141,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  static Widget specialOfferCard(String name, String price, String oldPrice,
-      String rating, int reviews, String imagePath) {
+
+
+  static Widget specialOfferCard(String name,double price, double oldPrice,
+      double rating, double reviews, String imagePath, double offer) {
     return GestureDetector(
       onTap: () {},
       child: Container(
         width: 160,
+      
+        
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -163,7 +172,7 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
-                      image: AssetImage(imagePath),
+                      image: NetworkImage(imagePath),
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -178,16 +187,17 @@ class HomePage extends StatelessWidget {
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: const Text("45% OFF",
-                        style: TextStyle(color: Colors.white, fontSize: 10)),
+                    child:  Text('${offer} %',
+                        style: TextStyle(color: Colors.white, fontSize: 12)),
                   ),
                 )
               ],
             ),
             const SizedBox(height: 10),
-            Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text(price, style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text(oldPrice,
+            Text(name, overflow:TextOverflow.ellipsis,style: const TextStyle(fontWeight: FontWeight.bold)),
+
+            Text('${price} ', style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text('${oldPrice}',
                 style: const TextStyle(
                     decoration: TextDecoration.lineThrough,
                     color: Colors.grey)),

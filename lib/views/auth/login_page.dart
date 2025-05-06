@@ -1,3 +1,5 @@
+import 'package:e_commerce_project/views/bottomnavbar/bottomnav.dart';
+import 'package:e_commerce_project/views/home/home_page.dart';
 import 'package:e_commerce_project/utils/validator/validator.dart';
 import 'package:e_commerce_project/views/auth/Signup_page.dart';
 import 'package:flutter/material.dart';

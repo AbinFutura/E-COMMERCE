@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:e_commerce_project/views/bottomnavbar/bottomnav.dart';
 import 'package:e_commerce_project/utils/validator/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_project/views/bottomnavbar/bottomnav.dart';
