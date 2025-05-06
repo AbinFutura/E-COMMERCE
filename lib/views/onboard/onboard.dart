@@ -57,38 +57,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             Positioned(
-              bottom: 20,
-              right: 20, // Position on the right
-              child:SizedBox(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width * 0.9,
-
-                  child: ElevatedButton(onPressed: (){
-
-                    if (currentPage < 2) {
-                      // Check if not on the last page
-                      pageController.animateToPage(
-                        currentPage + 1,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.ease,
-                      );
-                    } else {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => SignupPage()));
-                      // Navigate to the next screen or perform an action
-                      // print("Last Page Reached!");
-                      // Example: Navigator.push(...);
-                    }
-
-                  },
-                      style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,),)),
-
-                      child:const  Text('NEXT')))
-
-
-            ),
+                bottom: 20,
+                right: 20, // Position on the right
+                child: SizedBox(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          if (currentPage < 2) {
+                            // Check if not on the last page
+                            pageController.animateToPage(
+                              currentPage + 1,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.ease,
+                            );
+                          } else {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignupPage()));
+                            // Navigate to the next screen or perform an action
+                            // print("Last Page Reached!");
+                            // Example: Navigator.push(...);
+                          }
+                        },
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                          const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                        )),
+                        child: const Text('NEXT')))),
           ],
         ),
       ),
