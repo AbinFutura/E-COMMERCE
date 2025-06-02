@@ -1,4 +1,5 @@
 import 'package:e_commerce_project/providers/product_providers.dart';
+import 'package:e_commerce_project/views/product/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,8 +41,8 @@ class HomePage extends ConsumerWidget {
             const SizedBox(height: 20),
 
             // Address
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Icon(Icons.location_on_outlined, size: 20),
                 SizedBox(width: 5),
                 Text(
@@ -89,9 +90,9 @@ class HomePage extends ConsumerWidget {
             const SizedBox(height: 50),
 
             // Special Offers
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text("Special Offers",
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
@@ -110,10 +111,24 @@ class HomePage extends ConsumerWidget {
                 itemBuilder: (context,index){
 
                 final product = products.products![index];
-                return specialOfferCard(product.title!, product.price!, product.price!, product.rating!, product.rating!, product.thumbnail!,product.discountPercentage!);
+                final offer=double.parse(
+                        (product.price! - (product.price! * product.discountPercentage! / 100)).toStringAsFixed(2));
+                final totalReviews = product.reviews!.length;
+                //final comment = product.reviews![0].comment;
+                
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailsPage(imageUrl: product.thumbnail!, productName: product.title!,
+                     productDescription: product.description!,price: product.price!,
+                     offerPrice: offer,discountPercentage: product.discountPercentage!,
+                     rating: product.rating!,totalReviews: totalReviews,)));
+                    
+                  },
+                  
+                  child: specialOfferCard(context,product.title!,offer, product.price!, product.rating!,totalReviews, product.thumbnail!,product.discountPercentage!));
                 
 
-                }), error: (err, stack) => Center(child: Text('Error: $err')), loading: () => Center(child: CircularProgressIndicator()),)
+                }), error: (err, stack) => Center(child: Text('Error: $err')), loading: () => const Center(child: CircularProgressIndicator()),)
               
               
             ),
@@ -143,81 +158,80 @@ class HomePage extends ConsumerWidget {
 
 
 
-  static Widget specialOfferCard(String name,double price, double oldPrice,
-      double rating, double reviews, String imagePath, double offer) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 160,
+  static Widget specialOfferCard(BuildContext context, name,double offerPrice, double price,
+      double rating, int reviews, String imagePath, double discountPercentage) {
+    return Container(
+      width: 160,
+    
       
-        
-        margin: const EdgeInsets.only(right: 12),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black12, blurRadius: 6, offset: Offset(0, 4)),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                      image: NetworkImage(imagePath),
-                      fit: BoxFit.contain,
-                    ),
+      margin: const EdgeInsets.only(right: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+              color: Colors.black12, blurRadius: 6, offset: Offset(0, 4)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: 100,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(
+                    image: NetworkImage(imagePath),
+                    fit: BoxFit.contain,
                   ),
                 ),
-                Positioned(
-                  top: 8,
-                  left: 8,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child:  Text('${offer} %',
-                        style: TextStyle(color: Colors.white, fontSize: 12)),
+              ),
+              Positioned(
+                top: 8,
+                left: 8,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    borderRadius:  BorderRadius.only(topLeft: Radius.circular(8),bottomRight: Radius.circular(8)),
                   ),
-                )
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text(name, overflow:TextOverflow.ellipsis,style: const TextStyle(fontWeight: FontWeight.bold)),
-
-            Text('${price} ', style: const TextStyle(fontWeight: FontWeight.bold)),
-            Text('${oldPrice}',
-                style: const TextStyle(
-                    decoration: TextDecoration.lineThrough,
-                    color: Colors.grey)),
-            Row(
-              children: [
-                const Icon(Icons.star, size: 14, color: Colors.amber),
-                const SizedBox(width: 4),
-                Text("$rating ($reviews)",
-                    style: const TextStyle(fontSize: 12)),
-              ],
-            ),
-          ],
-        ),
+                  child:  Text('$discountPercentage %',
+                      style: const TextStyle(color: Colors.white, fontSize: 12)),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(name, overflow:TextOverflow.ellipsis,style: const TextStyle(fontWeight: FontWeight.bold)),
+    
+          Text('\$$offerPrice', style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text('\$$price',
+              style: const TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                  color: Colors.grey)),
+          Row(
+            children: [
+              const Icon(Icons.star, size: 14, color: Colors.amber),
+              const SizedBox(width: 4),
+              Text("$rating ($reviews)",
+                  style: const TextStyle(fontSize: 12)),
+            ],
+          ),
+        ],
       ),
     );
   }
 
   static Widget categoryCard(String label, IconData icon, Color color) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        
+      },
       child: Container(
         width: 165,
         height: 150,

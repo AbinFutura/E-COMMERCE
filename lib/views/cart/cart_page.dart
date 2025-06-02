@@ -1,44 +1,47 @@
+import 'package:e_commerce_project/models/cart_item_model.dart';
 import 'package:e_commerce_project/utils/constants/colors.dart';
 import 'package:e_commerce_project/utils/constants/images.dart';
+import 'package:e_commerce_project/views/cart/cart_item.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
-   CartPage({super.key});
 
-  final List<Map<String, dynamic>> cartItems =  [
-    {
-      "title": "EKERO",
-      "price": 230.00,
-      "oldPrice": 512.58,
-      "discount": "45% OFF",
-      "color": "Yellow",
-      "image": EImages.cart1,
-    },
-    {
-      "title": "PLATTANS",
-      "price": 24.99,
-      "oldPrice": 69.99,
-      "discount": "45% OFF",
-      "color": "Yellow",
-      "image": EImages.cart3,
-    },
-    {
-      "title": "STRANDMON",
-      "price": 274.13,
-      "oldPrice": 856.60,
-      "discount": "45% OFF",
-      "color": "Grey",
-      "image": EImages.cart2,
-    },
-    {
-      "title": "MALM",
-      "price": 139.99,
-      "oldPrice": 512058,
-      "discount": "45% OFF",
-      "color": "Yellow",
-      "image": EImages.cart4,
-    },
-  ];
+    const CartPage({super.key});
+
+  // final List<Map<String, dynamic>> cartItems =  [
+  //   {
+  //     "title": "EKERO",
+  //     "price": 230.00,
+  //     "oldPrice": 512.58,
+  //     "discount": "45% OFF",
+  //     "color": "Yellow",
+  //     "image": EImages.cart1,
+  //   },
+  //   {
+  //     "title": "PLATTANS",
+  //     "price": 24.99,
+  //     "oldPrice": 69.99,
+  //     "discount": "45% OFF",
+  //     "color": "Yellow",
+  //     "image": EImages.cart3,
+  //   },
+  //   {
+  //     "title": "STRANDMON",
+  //     "price": 274.13,
+  //     "oldPrice": 856.60,
+  //     "discount": "45% OFF",
+  //     "color": "Grey",
+  //     "image": EImages.cart2,
+  //   },
+  //   {
+  //     "title": "MALM",
+  //     "price": 139.99,
+  //     "oldPrice": 512058,
+  //     "discount": "45% OFF",
+  //     "color": "Yellow",
+  //     "image": EImages.cart4,
+  //   },
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +55,7 @@ class CartPage extends StatelessWidget {
               // Header Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
                     "My Cart",
@@ -95,8 +99,8 @@ class CartPage extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Image.asset(
-                              item['image'],
+                            Image.network(
+                              item.imageUrl,
                               height: 150,
                               width: 150,
                             ),
@@ -104,23 +108,26 @@ class CartPage extends StatelessWidget {
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    item['title'],
+                                    item.name,overflow: TextOverflow.ellipsis
+                                    ,
                                     style: const TextStyle(
-                                        color: Colors.black, fontSize: 20),
+                                        color: Colors.black, fontSize: 16),
                                   ),
                                   Text(
-                                    "\$${item['price']}",
+                                    "\$${item.offerPrice}",
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20),
                                   ),
                                   Row(
+                                    spacing: 10,
                                     children: [
                                       Text(
-                                        "\$${item['oldPrice']}",
+                                        "\$${item.price}",
                                         style: const TextStyle(
                                           decoration:
                                           TextDecoration.lineThrough,
@@ -139,7 +146,7 @@ class CartPage extends StatelessWidget {
                                           ),
                                         ),
                                         child: Text(
-                                          item['discount'],
+                                          '${item.discountPercentage}%OFF',
                                           style: const TextStyle(
                                               color: Colors.white),
                                         ),
@@ -147,11 +154,11 @@ class CartPage extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 10),
-                                  Text(
-                                    item['color'],
-                                    style: const TextStyle(
-                                        fontSize: 18, color: Colors.grey),
-                                  ),
+                                  // Text(
+                                  //   item['color'],
+                                  //   style: const TextStyle(
+                                  //       fontSize: 18, color: Colors.grey),
+                                 // ),
                                   Row(
                                     children: [
                                       IconButton(
